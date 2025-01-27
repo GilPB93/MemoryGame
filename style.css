@@ -1,0 +1,32 @@
+body{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: brown;
+
+}
+
+#game-board{
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+    grid-gap: 10px;
+    margin: 30px auto;
+    justify-content: center;
+}
+
+.card img{
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+
+}
+
+.card {
+    background-color: #384C73;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card .card-content {
+    opacity: 0;
+  }
