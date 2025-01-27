@@ -10,6 +10,7 @@ const cards = [
 ];
 
 const gameBoard = document.getElementById('game-board'); // Récupère l'élément game-board
+let selectedCards = []; // Crée un tableau vide
 
 // CREER UNE CARTE
 function createCard(cardUrl) { // Corrigé : utilisation de cardUrl
@@ -45,7 +46,32 @@ function shuffleArray(arrayToShuffle) { // Fonction qui prend un tableau en para
 // FLIP CARD
 function onCardClick(e){ // Fonction qui prend un événement en paramètre
     const card = e.target.parentElement; // Récupère l'élément parent de l'élément cliqué
-    card.classList.add("flip"); // Ajoute la classe 'flip' à l'élément parent
+    card.classList.add('flip'); // Ajoute la classe 'flip' à l'élément parent
+    
+    selectedCards.push(card); // Ajoute l'élément parent à la fin du tableau selectedCards
+    if(selectedCards.length == 2){ // Si le tableau selectedCards contient 2 éléments
+        setTimeout(() => { // Attend 1 seconde avant de valider ou pas la paire
+            if(selectedCards[0].dataset.value == selectedCards[1].dataset.value){ // Si les valeurs des éléments du tableau selectedCards sont égales
+                //on a trouvé une paire
+                selectedCards[0].classList.add("matched"); // Ajoute la classe 'matched' à l'élément 0 du tableau selectedCards
+                selectedCards[1].classList.add("matched"); // Ajoute la classe 'matched' à l'élément 1 du tableau selectedCards
+                selectedCards[0].removeEventListener('click', onCardClick); // Supprime l'écouteur d'événement 'click' de l'élément 0 du tableau selectedCards
+                selectedCards[1].removeEventListener('click', onCardClick); // Supprime l'écouteur d'événement 'click' de l'élément 1 du tableau selectedCards
+
+                const allCardNotMatched = document.querySelectorAll('.card:not(.matched)'); // Récupère tous les éléments avec la classe 'card' qui n'ont pas la classe 'matched'
+                if(allCardNotMatched.length == 0){ // Si le tableau allCardNotMatched est vide
+                    alert('Bravo, vous avez gagné'); // Affiche une alerte : Le joueur a gagné
+                }
+            }
+            else{
+                //on s'est trompé
+                
+                    selectedCards[0].classList.remove("flip"); // Supprime la classe 'flip' de l'élément 0 du tableau selectedCards
+                    selectedCards[1].classList.remove("flip"); // Supprime la classe 'flip' de l'élément 1 du tableau selectedCards
+            }
+            selectedCards = []; // Réinitialise le tableau selectedCards
+        }, 1000)
+    }
 }
 
 

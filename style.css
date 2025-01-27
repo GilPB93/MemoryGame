@@ -1,7 +1,6 @@
 body{
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: brown;
 
 }
 
@@ -15,7 +14,7 @@ body{
 }
 
 .card img{
-    border-radius: 10px;
+    border-radius: 5px;
     width: 100px;
     height: 100px;
 
@@ -23,14 +22,30 @@ body{
 
 .card {
     background-color: #384C73;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
+    transform: rotateY(0deg);
+    transition: all 0.5s;
 }
 
 .card .card-content {
     opacity: 0;
+    transition: all 0.3s;
 }
 
 .card.flip .card-content {
     opacity: 1;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.card.flip{
+    transform: rotateY(180deg);
+}
+
+.card.matched {
+    border: solid 4px rgb(0, 255, 0);
+    box-sizing: border-box; 
+    cursor: default;
+    border-radius: 5px;
 }
