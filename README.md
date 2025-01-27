@@ -19,7 +19,8 @@ Voici les versions recommandées des outils nécessaires :
 
 ### 1. **Cloner le projet**  
    ```bash
-   git clone https://github.com/GilPB93/MemoryGame--Studi2024-
+   git clone https://github.com/GilPB93/MemoryGame
+   cd MemoryGame
    ```
 
 ### 2. **Lancer le projet**  
@@ -35,4 +36,4 @@ Vous pouvez lancer un serveur local avec votre outil de choix, ou utiliser la co
 
 ---
 
-[⬆️ Vers le haut](#)
+[⬆️ Vers le haut](#MemoryGame)
