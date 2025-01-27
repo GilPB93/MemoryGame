@@ -22,6 +22,7 @@ function createCard(cardUrl) { // Corrigé : utilisation de cardUrl
     cardContent.src = cardUrl; // Corrigé : utilisation de cardUrl directement
     card.appendChild(cardContent); // Ajoute l'élément img à la div
 
+    card.addEventListener('click', onCardClick); // Ajoute un écouteur d'événement 'click' à la div
     return card; // Retourne la div
 }
 
@@ -35,10 +36,16 @@ function duplicateArray(arraySimple) { // Fonction qui prend un tableau en param
 }
 
 // MELANGER LE TABLEAU
-function shuffleArray(arrayToShuffle) {
+function shuffleArray(arrayToShuffle) { // Fonction qui prend un tableau en paramètre et retourne un tableau mélangé
     const arrayShuffled = arrayToShuffle.sort(() => 0.5 - Math.random()); // Mélange le tableau en utilisant une fonction de tri aléatoire
 
-    return arrayShuffled;
+    return arrayShuffled; // Retourne le tableau mélangé
+}
+
+// FLIP CARD
+function onCardClick(e){ // Fonction qui prend un événement en paramètre
+    const card = e.target.parentElement; // Récupère l'élément parent de l'élément cliqué
+    card.classList.add("flip"); // Ajoute la classe 'flip' à l'élément parent
 }
 
 
