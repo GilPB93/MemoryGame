@@ -10,9 +10,16 @@
 
 <body>
     <h1>Memory Game</h1>
-    <div id="game-board"> </div>
+    <div class="game-info" text-align="center">
+        <h2>Comment jouer?</h2>
+        <p>Le but du jeu est de trouver toutes les paires d'images identiques.</p>
+        <p>Cliquez sur une carte pour la retourner et voir l'image cachée. Essayez de mémoriser l'emplacement de chaque image pour trouver les paires.</p>
+        <p>Le jeu est terminé lorsque toutes les paires d'images ont été trouvées.</p>
+        <p>Pour recommencer le jeu, cliquez sur le bouton "Commencer le jeu".</p>
+    </div>
     <span id="timer"></span>
-    <button id="restart-button">Start Game</button>
+    <button class="btn" id="restart-button">Commencer le jeu</button>
+    <div id="game-board"></div>
     
     <script src="script.js"></script>
 </body>

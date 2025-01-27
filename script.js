@@ -12,11 +12,52 @@ const cards = [
 const gameBoard = document.getElementById('game-board');
 const timerDisplay = document.getElementById('timer');
 const restartButton = document.getElementById('restart-button');
+const statsDisplay = document.getElementById('stats');
 
 let selectedCards = [];
 let isWaiting = false;
 let timerInterval;
 let startTime;
+
+// Gestion des cookies pour les scores
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+}
+
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const cookies = document.cookie.split(';');
+    for (let c of cookies) {
+        c.trim();
+        if (c.startsWith(nameEQ)) return c.substring(nameEQ.length);
+    }
+    return null;
+}
+
+function updateStats(newScore) {
+    let scores = getCookie('scores');
+    scores = scores ? JSON.parse(scores) : [];
+
+    scores.push(newScore);
+    setCookie('scores', JSON.stringify(scores), 365);
+
+    const totalScores = scores.reduce((sum, score) => sum + score, 0);
+    const averageScore = (totalScores / scores.length).toFixed(2);
+    const bestScore = Math.min(...scores);
+
+    statsDisplay.textContent = `Moyenne des scores : ${averageScore} secondes | Meilleur score : ${bestScore} secondes`;
+}
+
+function loadStats() {
+    const scores = getCookie('scores');
+    if (scores) {
+        updateStats(0); // Met à jour l'affichage sans ajouter de nouveau score
+    } else {
+        statsDisplay.textContent = 'Aucun score enregistré pour l\'instant';
+    }
+}
 
 // Chronomètre
 function startTimer() {
@@ -84,7 +125,9 @@ function onCardClick(e) {
                 const allCardNotMatched = document.querySelectorAll('.card:not(.matched)');
                 if (allCardNotMatched.length === 0) {
                     stopTimer();
-                    alert(`Bravo, vous avez gagné ! Temps total : ${timerDisplay.textContent}`);
+                    const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                    alert(`Bravo, vous avez gagné ! Temps total : ${elapsedTime} secondes`);
+                    updateStats(elapsedTime);
                 }
             } else {
                 // Mauvaise paire
@@ -116,4 +159,5 @@ function restartGame() {
 
 // Initialisation
 restartButton.addEventListener('click', restartGame);
+loadStats();
 restartGame();

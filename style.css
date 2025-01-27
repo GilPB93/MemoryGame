@@ -49,3 +49,22 @@ body{
     cursor: default;
     border-radius: 5px;
 }
+
+.btn{
+    background-color: #384C73;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: #2B3A57;
+}
+
+.game-info{
+    font-family: Arial, sans-serif;
+    font-size: 0.5rem;
+}
